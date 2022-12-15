@@ -9,7 +9,7 @@ The following examples are extracted from the example project available in the r
 
 # Demo of Dropdown Searchable list with choices
 
-![drop-down-list](https://github.com/AmirHome/select_searchable_list/blob/main/assets/demo_select_searchable_list.gif)
+![drop-down-list](https://github.com/AmirHome/select_searchable_list/blob/master/assets/demo_select_searchable_list.gif)
 
 # How to Use
 ```
@@ -50,7 +50,7 @@ This property takes List<SelectedListItem> as a parameter and it is useful to di
 This property takes int value as a parameter. This is use to set the initial segment from [segmentNames].
 
 ##### enableMultipleSelection:
-This property takes Color value as a parameter. You can change the background color of animated segment. default value is `Color(0xff8AADFB)`
+This property takes Color value as a parameter. You can change the background color of animated segment.
 
 ##### bottomSheetTitle:
 This gives the bottom sheet title.
