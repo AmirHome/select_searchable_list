@@ -1,7 +1,3 @@
 library select_searchable_list;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/drop_down_text_field.dart';
