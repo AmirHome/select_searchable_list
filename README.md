@@ -7,6 +7,10 @@ This plugin has been successfully tested on iOS, Android & web.
 # Examples
 The following examples are extracted from the example project available in the repository. More examples are available in this project.
 
+# Demo of Dropdown Searchable list with choices
+
+![drop-down-list](https://github.com/AmirHome/select_searchable_list/blob/main/assets/demo_select_searchable_list.gif)
+
 # How to Use
 ```
           // ####### Category Select List
