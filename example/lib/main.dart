@@ -27,7 +27,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 
   final Map<int, String> _listColors = {1:'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold',  5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
 
-  final List<int> _selectedColors = [2,5];
+  final List<int> _selectedColors = [2,4];
 
   /// This is register text field controllers.
   final TextEditingController _productNameTextEditingController = TextEditingController();
