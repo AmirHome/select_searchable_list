@@ -73,4 +73,4 @@ Dropdown Searchable list is [MIT-licensed](https://github.com/AmirHome/select_se
 
 # Let us know!
 
-I would be happy if you send us feedback on your projects where you use our component. Just email hi@amirhome.com and let me know if you have any questions or suggestions about my work.
+I would be happy if you send us feedback on your projects where you use our component. Just email amir.email@gmail.com  and let me know if you have any questions or suggestions about my work.
