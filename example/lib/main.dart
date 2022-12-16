@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:select_searchable_list/select_searchable_list.dart';
 
 void main() {
-  runApp(
-    const MaterialApp(
-      home: SelectSearchableListExample(),
-      debugShowCheckedModeBanner: false,
-    ),
-  );
+  runApp(const MyApp());
 }
+
+class MyApp extends StatelessWidget{
+  const MyApp({super.key});
+
+    @override
+  Widget build(BuildContext context) {
+      return const MaterialApp(
+        home: SelectSearchableListExample(),
+        debugShowCheckedModeBanner: false,
+      );
+  }}
 
 class SelectSearchableListExample extends StatefulWidget {
   const SelectSearchableListExample({
@@ -16,7 +22,7 @@ class SelectSearchableListExample extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _SelectSearchableListExampleState createState() => _SelectSearchableListExampleState();
+  State<SelectSearchableListExample> createState() => _SelectSearchableListExampleState();
 }
 
 class _SelectSearchableListExampleState extends State<SelectSearchableListExample> {
@@ -47,13 +53,13 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: _mainBody(),
+        child: _bodyApp(),
       ),
     );
   }
 
   /// This is Main Body widget.
-  Widget _mainBody() {
+  Widget _bodyApp() {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -74,7 +80,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
           ),
           TextFormField(
             controller: _productNameTextEditingController,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Product Name',
             ),
@@ -91,7 +97,8 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
             options: _listCategories,
             selectedOptions: _selectedCategory,
             onChanged: (selectedIds) {
-              // setState(() => add);
+              // setState(() => selectedIds);
+              // print(selectedIds);
             },
           ),
 
@@ -103,12 +110,13 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
             options: _listColors,
             selectedOptions: _selectedColors,
             onChanged: (selectedIds) {
-              // setState(() => add);
+              // setState(() => selectedIds);
+              // print(selectedIds);
             },
             multiple: true,
           ),
 
-          _AppElevatedButton(),
+          _UpdateButton(),
         ],
       ),
     );
@@ -116,7 +124,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 }
 
 /// This is common class for 'REGISTER' elevated button.
-class _AppElevatedButton extends StatelessWidget {
+class _UpdateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -124,13 +132,13 @@ class _AppElevatedButton extends StatelessWidget {
       height: 60.0,
       child: ElevatedButton(
         onPressed: () {},
-        child: const Text(
-          'Update',
-          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
-        ),
         style: ElevatedButton.styleFrom(
 
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+        child: const Text(
+          'Update',
+          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
         ),
       ),
     );
