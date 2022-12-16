@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'app_text_field.dart';
 
 class DropDown {
-
   /// This will give the list of data.
   final Map<int, String> options;
 
@@ -109,12 +108,14 @@ class _MainBodyState extends State<MainBody> {
         return Column(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+              padding:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   /// Bottom sheet title text
-                  Expanded(child: widget.dropDown.bottomSheetTitle ?? Container()),
+                  Expanded(
+                      child: widget.dropDown.bottomSheetTitle ?? Container()),
 
                   /// Done button
                   Visibility(
@@ -127,7 +128,8 @@ class _MainBodyState extends State<MainBody> {
                             widget.dropDown.selectedItems?.call(selectedList);
                             _onUnFocusKeyboardAndPop();
                           },
-                          child: widget.dropDown.submitButtonChild ?? const Text('Done'),
+                          child: widget.dropDown.submitButtonChild ??
+                              const Text('Done'),
                         ),
                       ),
                     ),
@@ -161,7 +163,8 @@ class _MainBodyState extends State<MainBody> {
                     onTap: widget.dropDown.enableMultipleSelection
                         ? null
                         : () {
-                            widget.dropDown.selectedItems?.call([mainListKeys[index]]);
+                            widget.dropDown.selectedItems
+                                ?.call([mainListKeys[index]]);
                             _onUnFocusKeyboardAndPop();
                           },
                     child: Container(
@@ -176,14 +179,18 @@ class _MainBodyState extends State<MainBody> {
                           trailing: widget.dropDown.enableMultipleSelection
                               ? GestureDetector(
                                   onTap: () {
-                                    !isSelected ? selectedList.add(mainListKeys[index]) : selectedList.remove(mainListKeys[index]);
+                                    !isSelected
+                                        ? selectedList.add(mainListKeys[index])
+                                        : selectedList
+                                            .remove(mainListKeys[index]);
                                     setState(() {
                                       //selectedList;
                                     });
                                   },
                                   child: isSelected
                                       ? const Icon(Icons.check_box)
-                                      : const Icon(Icons.check_box_outline_blank),
+                                      : const Icon(
+                                          Icons.check_box_outline_blank),
                                 )
                               : const SizedBox(
                                   height: 0.0,
@@ -204,10 +211,10 @@ class _MainBodyState extends State<MainBody> {
 
   /// This helps when search enabled & show the filtered data in list.
   _buildSearchList(String userSearchTerm) {
-
     // ####### Clone of options
     final results = Map<int, String>.from(widget.dropDown.options);
-    results.removeWhere((id, value) => ! value.toLowerCase().contains(userSearchTerm.toLowerCase()));
+    results.removeWhere((id, value) =>
+        !value.toLowerCase().contains(userSearchTerm.toLowerCase()));
 
     if (userSearchTerm.isEmpty) {
       mainList = widget.dropDown.options;
@@ -224,9 +231,9 @@ class _MainBodyState extends State<MainBody> {
   }
 
   void _setSearchWidgetListener() {
-        TextFormField? searchField = widget.dropDown.searchWidget;
-        searchField?.controller?.addListener(() {
-        _buildSearchList(searchField.controller?.text ?? '');
+    TextFormField? searchField = widget.dropDown.searchWidget;
+    searchField?.controller?.addListener(() {
+      _buildSearchList(searchField.controller?.text ?? '');
     });
   }
 }

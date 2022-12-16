@@ -5,16 +5,17 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-    @override
+  @override
   Widget build(BuildContext context) {
-      return const MaterialApp(
-        home: SelectSearchableListExample(),
-        debugShowCheckedModeBanner: false,
-      );
-  }}
+    return const MaterialApp(
+      home: SelectSearchableListExample(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
 
 class SelectSearchableListExample extends StatefulWidget {
   const SelectSearchableListExample({
@@ -22,23 +23,48 @@ class SelectSearchableListExample extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SelectSearchableListExample> createState() => _SelectSearchableListExampleState();
+  State<SelectSearchableListExample> createState() =>
+      _SelectSearchableListExampleState();
 }
 
-class _SelectSearchableListExampleState extends State<SelectSearchableListExample> {
+class _SelectSearchableListExampleState
+    extends State<SelectSearchableListExample> {
   /// This is list of city which will pass to the drop down.
-  final Map<int, String> _listCategories = {1:'Boot', 2: 'Casual', 3: 'Flat', 4: 'Flip',  5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
+  final Map<int, String> _listCategories = {
+    1: 'Boot',
+    2: 'Casual',
+    3: 'Flat',
+    4: 'Flip',
+    5: 'Lace up',
+    6: 'Loafer',
+    7: 'Slip-on',
+    8: 'Moccasins'
+  };
 
   final List<int> _selectedCategory = [1];
 
-  final Map<int, String> _listColors = {1:'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold',  5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
+  final Map<int, String> _listColors = {
+    1: 'Black',
+    2: 'Blue',
+    3: 'Brown',
+    4: 'Gold',
+    5: 'Green',
+    6: 'Grey',
+    7: 'Orange',
+    8: 'Pink',
+    9: 'Purple',
+    10: 'Red'
+  };
 
-  final List<int> _selectedColors = [2,4];
+  final List<int> _selectedColors = [2, 4];
 
   /// This is register text field controllers.
-  final TextEditingController _productNameTextEditingController = TextEditingController();
-  final TextEditingController _categoryTextEditingController = TextEditingController();
-  final TextEditingController _colorsTextEditingController = TextEditingController();
+  final TextEditingController _productNameTextEditingController =
+      TextEditingController();
+  final TextEditingController _categoryTextEditingController =
+      TextEditingController();
+  final TextEditingController _colorsTextEditingController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -133,7 +159,6 @@ class _UpdateButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         child: const Text(

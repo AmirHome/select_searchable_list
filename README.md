@@ -13,6 +13,16 @@ The following examples are extracted from the example project available in the r
 
 # How to Use
 ```
+          // ####### Data Sample (API Response)
+          // Data value Api
+          final Map<int, String> _listCategories = {1:'Boot', 2: 'Casual', 3: 'Flat', 4: 'Flip',  5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
+          // Default value
+          final List<int> _selectedCategory = [1];
+          // Data value Api
+          final Map<int, String> _listColors = {1:'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold',  5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
+          // Default value
+          final List<int> _selectedColors = [2,4];
+  
           // ####### Category Select List
           DropDownTextField(
             textEditingController: _categoryTextEditingController,

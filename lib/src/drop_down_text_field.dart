@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'drop_down.dart';
 
-
 /// This is Common App textfiled class.
 class DropDownTextField extends StatefulWidget {
   final TextEditingController textEditingController;
@@ -36,7 +35,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
     DropDownState(
       DropDown(
         bottomSheetTitle: Text(
-          widget.title??'',
+          widget.title ?? '',
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
@@ -52,10 +51,9 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
         options: widget.options,
         selectedOptions: widget.selectedOptions,
         selectedItems: (List<dynamic> selectedList) {
-
-          widget.textEditingController.text = tmpImplode(widget.options, selectedList);
+          widget.textEditingController.text =
+              tmpImplode(widget.options, selectedList);
           widget.onChanged?.call(List<int>.from(selectedList));
-
         },
         enableMultipleSelection: widget.multiple,
       ),
@@ -64,10 +62,9 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
 
   @override
   void initState() {
-
-    if( !['', null, false, 0].contains(widget.selectedOptions) ){
-
-      widget.textEditingController.text = tmpImplode(widget.options, widget.selectedOptions!);
+    if (!['', null, false, 0].contains(widget.selectedOptions)) {
+      widget.textEditingController.text =
+          tmpImplode(widget.options, widget.selectedOptions!);
     }
     super.initState();
   }
@@ -95,7 +92,9 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
             border: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 0,
-                style: ['', null].contains(widget.title) ? BorderStyle.none : BorderStyle.solid,
+                style: ['', null].contains(widget.title)
+                    ? BorderStyle.none
+                    : BorderStyle.solid,
               ),
             ),
             suffixIcon: const Padding(
