@@ -1,3 +1,7 @@
+## 0.0.13
+
+* Core: TextFormField classic style [When the title is not set, it will have no border]
+
 ## 0.0.11
 
 * Make a example

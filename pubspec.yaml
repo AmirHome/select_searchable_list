@@ -1,6 +1,6 @@
 name: select_searchable_list
 description: A very useful widget for searching through single or multiple options from a drop-down list.
-version: 0.0.11
+version: 0.0.13
 homepage: https://github.com/AmirHome/select_searchable_list
 
 environment:
