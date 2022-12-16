@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'drop_down.dart';
 
 /// This is Common App textfiled class.
+/// We use this widget for show drop-down for options
 class DropDownTextField extends StatefulWidget {
   final TextEditingController textEditingController;
   final String? title;
@@ -110,6 +111,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
     );
   }
 
+  // Comma separated values of options
   String tmpImplode(Map<int, String> options, List<dynamic> tmpSelectedList) {
     Map<int, String> tmpOptions = Map<int, String>.from(options);
 

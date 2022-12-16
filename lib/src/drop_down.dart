@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'app_text_field.dart';
 
+/// Searchable and Popup showModal list of Options
+
 class DropDown {
   /// This will give the list of data.
   final Map<int, String> options;
