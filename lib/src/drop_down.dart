@@ -158,6 +158,12 @@ class _MainBodyState extends State<MainBody> {
                   bool isSelected = selectedList.contains(mainListKeys[index]);
 
                   return InkWell(
+                    onTap: widget.dropDown.enableMultipleSelection
+                        ? null
+                        : () {
+                            widget.dropDown.selectedItems?.call([mainListKeys[index]]);
+                            _onUnFocusKeyboardAndPop();
+                          },
                     child: Container(
                       color: widget.dropDown.dropDownBackgroundColor,
                       child: Padding(
@@ -172,7 +178,7 @@ class _MainBodyState extends State<MainBody> {
                                   onTap: () {
                                     !isSelected ? selectedList.add(mainListKeys[index]) : selectedList.remove(mainListKeys[index]);
                                     setState(() {
-                                      selectedList;
+                                      //selectedList;
                                     });
                                   },
                                   child: isSelected
@@ -186,12 +192,6 @@ class _MainBodyState extends State<MainBody> {
                         ),
                       ),
                     ),
-                    onTap: widget.dropDown.enableMultipleSelection
-                        ? null
-                        : () {
-                            widget.dropDown.selectedItems?.call([mainListKeys[index]]);
-                            _onUnFocusKeyboardAndPop();
-                          },
                   );
                 },
               ),
@@ -224,9 +224,9 @@ class _MainBodyState extends State<MainBody> {
   }
 
   void _setSearchWidgetListener() {
-        TextFormField? _searchField = (widget.dropDown.searchWidget as TextFormField?);
-        _searchField?.controller?.addListener(() {
-        _buildSearchList(_searchField.controller?.text ?? '');
+        TextFormField? searchField = widget.dropDown.searchWidget;
+        searchField?.controller?.addListener(() {
+        _buildSearchList(searchField.controller?.text ?? '');
     });
   }
 }

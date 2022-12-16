@@ -6,7 +6,7 @@ import 'drop_down.dart';
 /// This is Common App textfiled class.
 class DropDownTextField extends StatefulWidget {
   final TextEditingController textEditingController;
-  final String title;
+  final String? title;
   final String hint;
   final Map<int, String> options;
   final List<int>? selectedOptions;
@@ -15,7 +15,7 @@ class DropDownTextField extends StatefulWidget {
 
   const DropDownTextField({
     required this.textEditingController,
-    required this.title,
+    this.title,
     required this.hint,
     required this.options,
     this.selectedOptions,
@@ -25,18 +25,18 @@ class DropDownTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DropDownTextFieldState createState() => _DropDownTextFieldState();
+  State<DropDownTextField> createState() => _DropDownTextFieldState();
 }
 
 class _DropDownTextFieldState extends State<DropDownTextField> {
-  final TextEditingController _searchTextEditingController = TextEditingController();
+  // final TextEditingController _searchTextEditingController = TextEditingController();
 
   /// This is on text changed method which will display on city text field on changed.
   void onTextFieldTap() {
     DropDownState(
       DropDown(
         bottomSheetTitle: Text(
-          widget.title,
+          widget.title??'',
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
@@ -89,13 +89,13 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
           },
           decoration: InputDecoration(
             // filled: true,
-            // labelText: widget.title,
+            labelText: widget.title,
             hintText: widget.hint,
             floatingLabelBehavior: FloatingLabelBehavior.always,
-            border: const OutlineInputBorder(
+            border: OutlineInputBorder(
               borderSide: BorderSide(
                 width: 0,
-                style: BorderStyle.none,
+                style: ['', null].contains(widget.title) ? BorderStyle.none : BorderStyle.solid,
               ),
             ),
             suffixIcon: const Padding(
