@@ -104,6 +104,7 @@ class _SelectSearchableListExampleState
           const SizedBox(
             height: 15.0,
           ),
+          /// Product name field
           TextFormField(
             controller: _productNameTextEditingController,
             decoration: const InputDecoration(
@@ -149,7 +150,7 @@ class _SelectSearchableListExampleState
   }
 }
 
-/// This is common class for 'REGISTER' elevated button.
+/// This is common class for 'Update' elevated button.
 class _UpdateButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

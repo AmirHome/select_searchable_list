@@ -59,7 +59,9 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 
+  /// Clear search box and reset list options
   void onClearTap() {
     _editingController.clear();
+    widget.onTextChanged('');
   }
 }
