@@ -1,3 +1,7 @@
+## 0.0.19
+
+* Reset the list when I tap the clear icon in the search textbox
+
 ## 0.0.15
 
 * Improve documentation
