@@ -104,6 +104,7 @@ class _SelectSearchableListExampleState
           const SizedBox(
             height: 15.0,
           ),
+
           /// Product name field
           TextFormField(
             controller: _productNameTextEditingController,
