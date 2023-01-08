@@ -4,6 +4,13 @@ import 'drop_down.dart';
 
 /// This is Common App textfiled class.
 /// We use this widget for show drop-down for options
+/*
+The DropDownTextField class is a Flutter widget that displays a text field with a dropdown icon. When the dropdown icon is tapped, a modal bottom sheet is displayed with a list of options. The user can select one or more options from the list, depending on the value of the multiple parameter.
+
+The DropDownTextField widget has a number of parameters that can be set to customize its behavior and appearance. For example, the textEditingController parameter is used to specify a TextEditingController that is used to manage the state of the text field, and the title parameter is used to specify a title for the text field. The hint parameter is used to specify a hint text for the text field, and the options parameter is used to specify the list of options to display in the dropdown.
+
+The DropDownTextField widget also has a selectedOptions parameter that can be used to specify the initially selected options, and an onChanged callback function that is called whenever the selected options change. The multiple parameter can be set to true to enable multiple selection of options, or to false to enable single selection of options.
+* */
 class DropDownTextField extends StatefulWidget {
   final TextEditingController textEditingController;
   final String? title;

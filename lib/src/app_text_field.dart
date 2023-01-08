@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'drop_down.dart';
 
 /// This is search text field class.
+/*
+The AppTextField class is a Flutter widget that displays a search text field with a clear button. The AppTextField widget has two required parameters: dropDown and onTextChanged. The dropDown parameter is an instance of the DropDown class, which is used to specify the list of options to display in the dropdown, and the onTextChanged parameter is a callback function that is called whenever the text in the text field changes.
+
+The AppTextField widget is implemented using a TextFormField widget and a TextEditingController. The TextFormField widget is used to display the text field, and the TextEditingController is used to manage the state of the text field. The AppTextField widget also has a clear button that can be used to clear the text field and reset the list of options in the dropdown.
+* */
 class AppTextField extends StatefulWidget {
   final DropDown dropDown;
   final Function(String) onTextChanged;

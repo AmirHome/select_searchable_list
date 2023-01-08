@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 import 'app_text_field.dart';
 
 /// Searchable and Popup showModal list of Options
+/*
+* This code defines a Flutter widget called DropDown that displays a searchable and popup list of options. The DropDown widget has a number of optional parameters that can be set to customize its behavior and appearance. For example, you can set the options parameter to provide the list of options to display, the selectedOptions parameter to specify which options should be initially selected, and the selectedItems parameter to specify a callback function that will be called when the selected options change.
 
+The DropDown widget also has a number of other optional parameters, such as listBuilder, which allows you to specify a custom widget to display for each option in the list, and enableMultipleSelection, which allows you to enable or disable multiple selection of options.
+
+The DropDownState class is responsible for showing the dropdown as a modal bottom sheet when the showModal method is called. The MainBody widget is the main content of the bottom sheet, and the _MainBodyState class is its stateful implementation. The _MainBodyState class has a number of fields and methods that are used to manage the state of the dropdown, such as the mainList field, which holds the list of options, and the selectedList field, which holds the list of selected options.
+*/
 class DropDown {
   /// This will give the list of data.
   final Map<int, String> options;
@@ -109,9 +115,17 @@ class _MainBodyState extends State<MainBody> {
       builder: (BuildContext context, ScrollController scrollController) {
         return Column(
           children: <Widget>[
+            const SizedBox(height: 8),
+            Container(
+              width: MediaQuery.of(context).size.width / 5, // sets the width of the container to 200 pixels
+              height: 3,
+              color: Colors.grey,
+            ),
+            //SizedBox(height: 13),
             Padding(
               padding:
-                  const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+                  EdgeInsets.only(left: 13.0, right: 13.0, top: 21.0,
+                      bottom: (widget.dropDown.enableMultipleSelection) ? 0.0 : 13.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -172,7 +186,7 @@ class _MainBodyState extends State<MainBody> {
                     child: Container(
                       color: widget.dropDown.dropDownBackgroundColor,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
                         child: ListTile(
                           title: widget.dropDown.listBuilder?.call(index) ??
                               Text(
