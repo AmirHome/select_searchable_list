@@ -117,15 +117,19 @@ class _MainBodyState extends State<MainBody> {
           children: <Widget>[
             const SizedBox(height: 8),
             Container(
-              width: MediaQuery.of(context).size.width / 5, // sets the width of the container to 200 pixels
+              width: MediaQuery.of(context).size.width /
+                  5, // sets the width of the container to 200 pixels
               height: 3,
               color: Colors.grey,
             ),
             //SizedBox(height: 13),
             Padding(
-              padding:
-                  EdgeInsets.only(left: 13.0, right: 13.0, top: 21.0,
-                      bottom: (widget.dropDown.enableMultipleSelection) ? 0.0 : 13.0),
+              padding: EdgeInsets.only(
+                  left: 13.0,
+                  right: 13.0,
+                  top: 21.0,
+                  bottom:
+                      (widget.dropDown.enableMultipleSelection) ? 0.0 : 13.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
