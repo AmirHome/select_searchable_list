@@ -1,3 +1,8 @@
+## 0.1.00
+
+* Design changes
+* Upgrade dependencies
+
 ## 0.0.19
 
 * Reset the list when I tap the clear icon in the search textbox
