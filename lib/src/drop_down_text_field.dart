@@ -20,6 +20,18 @@ class DropDownTextField extends StatefulWidget {
   final Function(List<int>?)? onChanged;
   final bool multiple;
 
+  //optional parameters
+  final InputDecoration? decoration;
+  final TextCapitalization? textCapitalization;
+  final TextInputAction? textInputAction;
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextDirection? textDirection;
+  final TextAlign? textAlign;
+  final TextAlignVertical? textAlignVertical;
+  final int? maxLines;
+  final int? minLines;
+
   const DropDownTextField({
     required this.textEditingController,
     this.title,
@@ -29,6 +41,18 @@ class DropDownTextField extends StatefulWidget {
     this.onChanged,
     this.multiple = false,
     Key? key,
+
+    /// optional parameters
+    this.decoration,
+    this.textCapitalization,
+    this.textInputAction,
+    this.style,
+    this.strutStyle,
+    this.textDirection,
+    this.textAlign,
+    this.textAlignVertical,
+    this.maxLines,
+    this.minLines,
   }) : super(key: key);
 
   @override
@@ -44,10 +68,11 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
       DropDown(
         bottomSheetTitle: Text(
           widget.title ?? '',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-          ),
+          style: widget.style ??
+              const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
         ),
         submitButtonChild: const Text(
           'Done',
@@ -92,24 +117,38 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
             FocusScope.of(context).unfocus();
             onTextFieldTap();
           },
-          decoration: InputDecoration(
-            // filled: true,
-            labelText: widget.title,
-            hintText: widget.hint,
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            border: OutlineInputBorder(
-              borderSide: BorderSide(
-                width: 0,
-                style: ['', null].contains(widget.title)
-                    ? BorderStyle.none
-                    : BorderStyle.solid,
+          // Optional
+          decoration: widget.decoration ??
+              InputDecoration(
+                // filled: true,
+                labelText: widget.title,
+                hintText: widget.hint,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: ['', null].contains(widget.title)
+                        ? BorderStyle.none
+                        : BorderStyle.solid,
+                  ),
+                ),
+                suffixIcon: const Padding(
+                  padding:
+                      EdgeInsets.only(top: 8), // add padding to adjust icon
+                  child: Icon(Icons.keyboard_capslock),
+                ),
               ),
-            ),
-            suffixIcon: const Padding(
-              padding: EdgeInsets.only(top: 15), // add padding to adjust icon
-              child: Icon(Icons.keyboard_capslock),
-            ),
-          ),
+
+          textCapitalization:
+              widget.textCapitalization ?? TextCapitalization.none,
+          textInputAction: widget.textInputAction,
+          style: widget.style,
+          strutStyle: widget.strutStyle,
+          textDirection: widget.textDirection,
+          textAlign: widget.textAlign ?? TextAlign.start,
+          textAlignVertical: widget.textAlignVertical,
+          maxLines: widget.maxLines ?? 1,
+          minLines: widget.minLines,
         ),
       ],
     );

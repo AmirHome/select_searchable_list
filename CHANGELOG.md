@@ -1,3 +1,7 @@
+## 0.1.04
+
+* Design Flexible
+
 ## 0.1.00
 
 * Design changes
