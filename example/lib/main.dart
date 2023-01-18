@@ -129,7 +129,9 @@ class _SelectSearchableListExampleState
               // print(selectedIds);
             },
           ),
-
+          const SizedBox(
+            height: 15.0,
+          ),
           // ####### Colors Select List
           DropDownTextField(
             textEditingController: _colorsTextEditingController,
@@ -143,7 +145,9 @@ class _SelectSearchableListExampleState
             },
             multiple: true,
           ),
-
+          const SizedBox(
+            height: 15.0,
+          ),
           _UpdateButton(),
         ],
       ),

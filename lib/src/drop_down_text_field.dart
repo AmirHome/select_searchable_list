@@ -111,9 +111,6 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
             ),
           ),
         ),
-        const SizedBox(
-          height: 15.0,
-        ),
       ],
     );
   }
