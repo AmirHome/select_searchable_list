@@ -32,6 +32,10 @@ class DropDownTextField extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
 
+  /// [isSearchVisible] flag use to manage the search widget visibility
+  /// by default it is [True] so widget will be visible.
+  final bool isSearchVisible;
+
   const DropDownTextField({
     required this.textEditingController,
     this.title,
@@ -53,6 +57,7 @@ class DropDownTextField extends StatefulWidget {
     this.textAlignVertical,
     this.maxLines,
     this.minLines,
+    this.isSearchVisible = true,
   }) : super(key: key);
 
   @override
@@ -89,6 +94,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
           widget.onChanged?.call(List<int>.from(selectedList));
         },
         enableMultipleSelection: widget.multiple,
+        isSearchVisible: widget.isSearchVisible,
       ),
     ).showModal(context);
   }
