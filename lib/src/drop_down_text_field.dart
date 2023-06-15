@@ -32,6 +32,8 @@ class DropDownTextField extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
 
+  final Widget? submitButton;
+
   /// [isSearchVisible] flag use to manage the search widget visibility
   /// by default it is [True] so widget will be visible.
   final bool isSearchVisible;
@@ -58,6 +60,7 @@ class DropDownTextField extends StatefulWidget {
     this.maxLines,
     this.minLines,
     this.isSearchVisible = true,
+    this.submitButton,
   }) : super(key: key);
 
   @override
@@ -79,7 +82,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
                 fontSize: 20.0,
               ),
         ),
-        submitButtonChild: const Text(
+        submitButtonChild: widget.submitButton ?? const Text(
           'Done',
           style: TextStyle(
             fontSize: 16,
