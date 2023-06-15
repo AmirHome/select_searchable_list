@@ -32,6 +32,8 @@ class DropDown {
   /// You can set your custom submit button when the multiple selection is enabled.
   final Widget? submitButtonChild;
 
+  final ButtonStyle? submitButtonStyle;
+
   /// [searchWidget] is use to show the text box for the searching.
   /// If you are passing your own widget then you must have to add [TextEditingController] for the [TextFormField].
   final TextFormField? searchWidget;
@@ -52,6 +54,7 @@ class DropDown {
     this.enableMultipleSelection = false,
     this.bottomSheetTitle,
     this.submitButtonChild,
+    this.submitButtonStyle,
     this.searchWidget,
     this.isSearchVisible = true,
     this.dropDownBackgroundColor = Colors.transparent,
@@ -148,6 +151,7 @@ class _MainBodyState extends State<MainBody> {
                             widget.dropDown.selectedItems?.call(selectedList);
                             _onUnFocusKeyboardAndPop();
                           },
+                          style: widget.dropDown.submitButtonStyle,
                           child: widget.dropDown.submitButtonChild ??
                               const Text('Done'),
                         ),
