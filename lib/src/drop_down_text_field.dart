@@ -22,6 +22,7 @@ class DropDownTextField extends StatefulWidget {
 
   //optional parameters
   final InputDecoration? decoration;
+  final InputBorder? decorationBorder;
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
   final TextStyle? style;
@@ -51,6 +52,7 @@ class DropDownTextField extends StatefulWidget {
 
     /// optional parameters
     this.decoration,
+    this.decorationBorder,
     this.textCapitalization,
     this.textInputAction,
     this.style,
@@ -136,7 +138,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
                 labelText: widget.title,
                 hintText: widget.hint,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: OutlineInputBorder(
+                border: widget.decorationBorder ?? OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 0,
                     style: ['', null].contains(widget.title)
