@@ -33,7 +33,10 @@ class DropDownTextField extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
 
+  /// [submitButtonChild] is used to set a custom widget as the submit button's child.
+  /// This could be the a Text(), Icon() or any other widget.
   final Widget? submitButtonChild;
+  /// [submitButtonStyle] is used to set a custom style for the submit button.
   final ButtonStyle? submitButtonStyle;
 
   /// [isSearchVisible] flag use to manage the search widget visibility

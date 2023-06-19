@@ -32,6 +32,7 @@ class DropDown {
   /// You can set your custom submit button when the multiple selection is enabled.
   final Widget? submitButtonChild;
 
+  /// You can set your custom submit button style when multiple selection is enabled.
   final ButtonStyle? submitButtonStyle;
 
   /// [searchWidget] is use to show the text box for the searching.
