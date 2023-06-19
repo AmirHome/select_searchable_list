@@ -43,6 +43,9 @@ class DropDownTextField extends StatefulWidget {
   /// by default it is [True] so widget will be visible.
   final bool isSearchVisible;
 
+  /// [searchHintText] is the hint text inside of the default search input field.
+  final String? searchHintText;
+
   const DropDownTextField({
     required this.textEditingController,
     this.title,
@@ -68,6 +71,7 @@ class DropDownTextField extends StatefulWidget {
     this.isSearchVisible = true,
     this.submitButtonChild,
     this.submitButtonStyle,
+    this.searchHintText,
   }) : super(key: key);
 
   @override
@@ -97,6 +101,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
             fontWeight: FontWeight.bold,
           ),
         ),
+        searchHintText: widget.searchHintText,
         options: widget.options,
         selectedOptions: widget.selectedOptions,
         selectedItems: (List<dynamic> selectedList) {
