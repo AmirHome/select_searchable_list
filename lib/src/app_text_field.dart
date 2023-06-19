@@ -11,9 +11,10 @@ The AppTextField widget is implemented using a TextFormField widget and a TextEd
 class AppTextField extends StatefulWidget {
   final DropDown dropDown;
   final Function(String) onTextChanged;
+  final String? searchHintText;
 
   const AppTextField(
-      {required this.dropDown, required this.onTextChanged, Key? key})
+      {required this.dropDown, required this.onTextChanged, this.searchHintText, Key? key})
       : super(key: key);
 
   @override
@@ -38,7 +39,7 @@ class _AppTextFieldState extends State<AppTextField> {
           fillColor: Colors.black12,
           contentPadding:
               const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
-          hintText: 'Search',
+          hintText: widget.searchHintText ?? 'Search',
           border: const OutlineInputBorder(
             borderSide: BorderSide(
               width: 0,
