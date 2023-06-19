@@ -22,6 +22,7 @@ class DropDownTextField extends StatefulWidget {
 
   //optional parameters
   final InputDecoration? decoration;
+  final InputBorder? decorationBorder;
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
   final TextStyle? style;
@@ -32,9 +33,18 @@ class DropDownTextField extends StatefulWidget {
   final int? maxLines;
   final int? minLines;
 
+  /// [submitButtonChild] is used to set a custom widget as the submit button's child.
+  /// This could be the a Text(), Icon() or any other widget.
+  final Widget? submitButtonChild;
+  /// [submitButtonStyle] is used to set a custom style for the submit button.
+  final ButtonStyle? submitButtonStyle;
+
   /// [isSearchVisible] flag use to manage the search widget visibility
   /// by default it is [True] so widget will be visible.
   final bool isSearchVisible;
+
+  /// [searchHintText] is the hint text inside of the default search input field.
+  final String? searchHintText;
 
   const DropDownTextField({
     required this.textEditingController,
@@ -48,6 +58,7 @@ class DropDownTextField extends StatefulWidget {
 
     /// optional parameters
     this.decoration,
+    this.decorationBorder,
     this.textCapitalization,
     this.textInputAction,
     this.style,
@@ -58,6 +69,9 @@ class DropDownTextField extends StatefulWidget {
     this.maxLines,
     this.minLines,
     this.isSearchVisible = true,
+    this.submitButtonChild,
+    this.submitButtonStyle,
+    this.searchHintText,
   }) : super(key: key);
 
   @override
@@ -79,13 +93,15 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
                 fontSize: 20.0,
               ),
         ),
-        submitButtonChild: const Text(
+        submitButtonStyle: widget.submitButtonStyle,
+        submitButtonChild: widget.submitButtonChild ?? const Text(
           'Done',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
+        searchHintText: widget.searchHintText,
         options: widget.options,
         selectedOptions: widget.selectedOptions,
         selectedItems: (List<dynamic> selectedList) {
@@ -130,7 +146,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
                 labelText: widget.title,
                 hintText: widget.hint,
                 floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: OutlineInputBorder(
+                border: widget.decorationBorder ?? OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 0,
                     style: ['', null].contains(widget.title)

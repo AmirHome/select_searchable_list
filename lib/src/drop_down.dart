@@ -32,6 +32,9 @@ class DropDown {
   /// You can set your custom submit button when the multiple selection is enabled.
   final Widget? submitButtonChild;
 
+  /// You can set your custom submit button style when multiple selection is enabled.
+  final ButtonStyle? submitButtonStyle;
+
   /// [searchWidget] is use to show the text box for the searching.
   /// If you are passing your own widget then you must have to add [TextEditingController] for the [TextFormField].
   final TextFormField? searchWidget;
@@ -39,6 +42,9 @@ class DropDown {
   /// [isSearchVisible] flag use to manage the search widget visibility
   /// by default it is [True] so widget will be visible.
   final bool isSearchVisible;
+
+  /// [searchHintText] is the hint text inside of the default search input field.
+  final String? searchHintText;
 
   /// This will set the background color to the dropdown.
   final Color dropDownBackgroundColor;
@@ -52,8 +58,10 @@ class DropDown {
     this.enableMultipleSelection = false,
     this.bottomSheetTitle,
     this.submitButtonChild,
+    this.submitButtonStyle,
     this.searchWidget,
     this.isSearchVisible = true,
+    this.searchHintText,
     this.dropDownBackgroundColor = Colors.transparent,
   });
 }
@@ -148,6 +156,7 @@ class _MainBodyState extends State<MainBody> {
                             widget.dropDown.selectedItems?.call(selectedList);
                             _onUnFocusKeyboardAndPop();
                           },
+                          style: widget.dropDown.submitButtonStyle,
                           child: widget.dropDown.submitButtonChild ??
                               const Text('Done'),
                         ),
@@ -165,6 +174,7 @@ class _MainBodyState extends State<MainBody> {
                   AppTextField(
                     dropDown: widget.dropDown,
                     onTextChanged: _buildSearchList,
+                    searchHintText: widget.dropDown.searchHintText,
                   ),
             ),
 
