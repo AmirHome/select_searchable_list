@@ -1,11 +1,11 @@
 name: select_searchable_list
 description: A very useful Flutter widget for searching through single or multiple options from a drop-down list.
-version: 0.1.05
+version: 0.1.06
 issue_tracker: https://github.com/AmirHome/select_searchable_list/issues
 homepage: https://github.com/AmirHome/select_searchable_list
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: '>=3.3.3 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -15,7 +15,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

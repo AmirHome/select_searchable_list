@@ -31,6 +31,9 @@ class DropDownTextField extends StatefulWidget {
   final TextAlignVertical? textAlignVertical;
   final int? maxLines;
   final int? minLines;
+  final Color? backgroundColor;
+  final Color? borderColor;
+  final Color? primaryColor;
 
   /// [isSearchVisible] flag use to manage the search widget visibility
   /// by default it is [True] so widget will be visible.
@@ -58,6 +61,9 @@ class DropDownTextField extends StatefulWidget {
     this.maxLines,
     this.minLines,
     this.isSearchVisible = true,
+    this.backgroundColor,
+    this.borderColor,
+    this.primaryColor,
   }) : super(key: key);
 
   @override
@@ -125,26 +131,47 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
           },
           // Optional
           decoration: widget.decoration ??
+              // InputDecoration(
+              //   // filled: true,
+              //   labelText: widget.title,
+              //   hintText: widget.hint,
+              //   floatingLabelBehavior: FloatingLabelBehavior.always,
+              //   border: OutlineInputBorder(
+              //     borderSide: BorderSide(
+              //       width: 0,
+              //       style: ['', null].contains(widget.title)
+              //           ? BorderStyle.none
+              //           : BorderStyle.solid,
+              //     ),
+              //   ),
+              //   suffixIcon: const Padding(
+              //     padding:
+              //         EdgeInsets.only(top: 8), // add padding to adjust icon
+              //     child: Icon(Icons.keyboard_capslock),
+              //   ),
+              // ),
               InputDecoration(
-                // filled: true,
-                labelText: widget.title,
-                hintText: widget.hint,
-                floatingLabelBehavior: FloatingLabelBehavior.always,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 0,
-                    style: ['', null].contains(widget.title)
-                        ? BorderStyle.none
-                        : BorderStyle.solid,
-                  ),
-                ),
-                suffixIcon: const Padding(
-                  padding:
-                      EdgeInsets.only(top: 8), // add padding to adjust icon
-                  child: Icon(Icons.keyboard_capslock),
-                ),
-              ),
+                      filled: true,
+                      fillColor: widget.backgroundColor ?? Colors.white,
+                      hintStyle: TextStyle(color: widget.borderColor ?? Colors.grey.shade300),
 
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                        borderSide: BorderSide(color: widget.borderColor ?? Colors.grey.shade300, width: 1.0, style: BorderStyle.solid),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
+                          borderSide:
+                          BorderSide(color: widget.primaryColor ?? Colors.black , width: 1.0, style: BorderStyle.solid)),
+                      // labelStyle: const TextStyle(color: AmirHomePalette.errorColor), // Color when not focused
+                      // floatingLabelStyle: TextStyle(color: AmirHomePalette.primaryColor), // Color when focused
+                      labelText: widget.title,
+                      hintText: widget.hint,
+                      suffixIcon: const Padding(
+                        padding: EdgeInsets.only(top: 8), // add padding to adjust icon
+                        child: Icon(Icons.keyboard_arrow_down),
+                      ),
+                    ),
           textCapitalization:
               widget.textCapitalization ?? TextCapitalization.none,
           textInputAction: widget.textInputAction,

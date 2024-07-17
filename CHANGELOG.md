@@ -1,3 +1,7 @@
+## 0.1.06
+* Update decoration
+* Update Flutter version
+
 ## 0.1.05
 * The isSearchVisible property is enabled
 
