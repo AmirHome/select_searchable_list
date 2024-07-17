@@ -1,4 +1,4 @@
-## 0.1.06
+## 0.1.6
 * Update decoration
 * Update Flutter version
 
