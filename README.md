@@ -9,7 +9,7 @@ The following examples are extracted from the example project available in the r
 
 # Demo of Dropdown Searchable list with choices
 
-![drop-down-list](https://github.com/AmirHome/select_searchable_list/blob/master/assets/demo_select_searchable_list.gif)
+![drop-down-list](https://raw.githubusercontent.com/AmirHome/select_searchable_list/master/assets/demo_select_searchable_list.gif)
 
 # How to Use
 ```
