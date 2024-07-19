@@ -23,25 +23,30 @@ class SelectSearchableListExample extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SelectSearchableListExample> createState() =>
-      _SelectSearchableListExampleState();
+  State<SelectSearchableListExample> createState() => _SelectSearchableListExampleState();
 }
 
-class _SelectSearchableListExampleState
-    extends State<SelectSearchableListExample> {
+class _SelectSearchableListExampleState extends State<SelectSearchableListExample> {
   /// This is list of city which will pass to the drop down.
-  final Map<int, String> _listCategories = {
-    1: 'Boot',
-    2: 'Casual',
-    3: 'Flat',
-    4: 'Flip',
-    5: 'Lace up',
-    6: 'Loafer',
-    7: 'Slip-on',
-    8: 'Moccasins'
-  };
 
-  final List<int> _selectedCategoryValue = [1];
+  void initState() {
+    super.initState();
+
+    //Delay 30 seconds
+
+    Future.delayed(const Duration(seconds: 20), () {
+      setState(() {
+        _listCategories = {1: 'Boot', 2: 'Casual', 3: 'Flat', 4: 'Flip', 5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
+
+        _selectedCategoryValue = [3];
+
+        print('Finish loading categories');
+      });
+    });
+  }
+
+  late Map<int, String> _listCategories = {};
+  late List<int> _selectedCategoryValue = [];
 
   final Map<int, String> _listColors = {
     1: 'Black',
@@ -59,12 +64,9 @@ class _SelectSearchableListExampleState
   final List<int> _selectedColorValues = [2, 4];
 
   /// This is register text field controllers.
-  final TextEditingController _productNameTextEditingController =
-      TextEditingController();
-  final TextEditingController _categoryTextEditingController =
-      TextEditingController();
-  final TextEditingController _colorsTextEditingController =
-      TextEditingController();
+  final TextEditingController _productNameTextEditingController = TextEditingController();
+  final TextEditingController _categoryTextEditingController = TextEditingController();
+  final TextEditingController _colorsTextEditingController = TextEditingController();
 
   @override
   void dispose() {
@@ -127,7 +129,7 @@ class _SelectSearchableListExampleState
             selectedOptions: _selectedCategoryValue,
             onChanged: (selectedIds) {
               // setState(() => selectedIds);
-              // print(selectedIds);
+              //print(selectedIds);
             },
           ),
           const SizedBox(
