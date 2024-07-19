@@ -119,6 +119,7 @@ class _SelectSearchableListExampleState
 
           // ####### Category Select List
           DropDownTextField(
+            //style: const TextStyle(height: 0.85, fontSize: 14.0, color: Colors.deepOrangeAccent), //initial
             textEditingController: _categoryTextEditingController,
             title: 'Category',
             hint: 'Select Category',
@@ -128,10 +129,6 @@ class _SelectSearchableListExampleState
               // setState(() => selectedIds);
               // print(selectedIds);
             },
-            // style: const TextStyle(
-            //   fontSize: 16.0,
-            //   color: Colors.red,
-            // ),
           ),
           const SizedBox(
             height: 13.0,

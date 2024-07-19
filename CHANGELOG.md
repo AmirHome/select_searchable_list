@@ -1,3 +1,6 @@
+## 0.1.7
+* Style default
+
 ## 0.1.6
 * Update decoration
 * Update Flutter version

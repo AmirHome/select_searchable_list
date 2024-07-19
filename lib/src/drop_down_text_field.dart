@@ -131,25 +131,6 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
           },
           // Optional
           decoration: widget.decoration ??
-              // InputDecoration(
-              //   // filled: true,
-              //   labelText: widget.title,
-              //   hintText: widget.hint,
-              //   floatingLabelBehavior: FloatingLabelBehavior.always,
-              //   border: OutlineInputBorder(
-              //     borderSide: BorderSide(
-              //       width: 0,
-              //       style: ['', null].contains(widget.title)
-              //           ? BorderStyle.none
-              //           : BorderStyle.solid,
-              //     ),
-              //   ),
-              //   suffixIcon: const Padding(
-              //     padding:
-              //         EdgeInsets.only(top: 8), // add padding to adjust icon
-              //     child: Icon(Icons.keyboard_capslock),
-              //   ),
-              // ),
               InputDecoration(
                       filled: true,
                       fillColor: widget.backgroundColor ?? Colors.white,
@@ -175,7 +156,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
           textCapitalization:
               widget.textCapitalization ?? TextCapitalization.none,
           textInputAction: widget.textInputAction,
-          style: widget.style,
+          style: widget.style ?? const TextStyle(height: 0.85, fontSize: 14.0), //initial
           strutStyle: widget.strutStyle,
           textDirection: widget.textDirection,
           textAlign: widget.textAlign ?? TextAlign.start,
