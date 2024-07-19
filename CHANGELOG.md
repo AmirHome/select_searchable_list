@@ -1,3 +1,6 @@
+## 0.1.8
+* Fixed set default value Api
+
 ## 0.1.7
 * Style default
 

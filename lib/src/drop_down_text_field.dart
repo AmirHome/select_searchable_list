@@ -114,6 +114,16 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
     super.initState();
   }
 
+  void didUpdateWidget(DropDownTextField oldWidget) {
+    if (oldWidget.selectedOptions != widget.selectedOptions) {
+      if (!['', null, false, 0].contains(widget.selectedOptions)) {
+        widget.textEditingController.text =
+            tmpImplode(widget.options, widget.selectedOptions!);
+      }
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
