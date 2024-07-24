@@ -19,6 +19,8 @@ class DropDownTextField extends StatefulWidget {
   final List<int>? selectedOptions;
   final Function(List<int>?)? onChanged;
   final bool multiple;
+  // FormFieldValidator<T>? validator
+  final FormFieldValidator<String>? validator;
 
   //optional parameters
   final InputDecoration? decoration;
@@ -50,6 +52,7 @@ class DropDownTextField extends StatefulWidget {
     Key? key,
 
     /// optional parameters
+    this.validator,
     this.decoration,
     this.textCapitalization,
     this.textInputAction,
@@ -107,21 +110,22 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
 
   @override
   void initState() {
-    if (!['', null, false, 0].contains(widget.selectedOptions)) {
-      widget.textEditingController.text =
-          tmpImplode(widget.options, widget.selectedOptions!);
-    }
+    renewValue();
     super.initState();
   }
 
   void didUpdateWidget(DropDownTextField oldWidget) {
     if (oldWidget.selectedOptions != widget.selectedOptions) {
-      if (!['', null, false, 0].contains(widget.selectedOptions)) {
-        widget.textEditingController.text =
-            tmpImplode(widget.options, widget.selectedOptions!);
-      }
+      renewValue();
     }
     super.didUpdateWidget(oldWidget);
+  }
+
+  void renewValue() {
+    if (!['', null, false, 0].contains(widget.selectedOptions)) {
+      widget.textEditingController.text =
+          tmpImplode(widget.options, widget.selectedOptions!);
+    }
   }
 
   @override
@@ -140,6 +144,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
             onTextFieldTap();
           },
           // Optional
+          validator: widget.validator,
           decoration: widget.decoration ??
               InputDecoration(
                       filled: true,

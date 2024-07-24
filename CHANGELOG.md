@@ -1,3 +1,6 @@
+## 0.1.9
+* Add Validator
+* 
 ## 0.1.8
 * Fixed set default value Api
 
