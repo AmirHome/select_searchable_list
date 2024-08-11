@@ -1,6 +1,10 @@
+## 0.2.0
+* Add FocusNode
+* Programmatically tap the drop down ability
+
 ## 0.1.9
 * Add Validator
-* 
+
 ## 0.1.8
 * Fixed set default value Api
 

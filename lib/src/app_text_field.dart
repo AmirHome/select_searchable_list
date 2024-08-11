@@ -13,8 +13,7 @@ class AppTextField extends StatefulWidget {
   final Function(String) onTextChanged;
 
   const AppTextField(
-      {required this.dropDown, required this.onTextChanged, Key? key})
-      : super(key: key);
+      {required this.dropDown, required this.onTextChanged, super.key});
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();

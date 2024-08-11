@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
 
 class SelectSearchableListExample extends StatefulWidget {
   const SelectSearchableListExample({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<SelectSearchableListExample> createState() => _SelectSearchableListExampleState();
@@ -34,55 +34,42 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
   final TextEditingController _categoryTextEditingController = TextEditingController();
   final TextEditingController _colorsTextEditingController = TextEditingController();
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<DropDownTextFieldState> _dropDownKey = GlobalKey<DropDownTextFieldState>();
+
   late Map<int, String> _listCategories = {};
-  late List<int> _selectedCategoryValue = [];
+  late final List<int> _selectedCategoryValue = [];
 
   late Map<int, String> _listColors = {};
   late List<int> _selectedColorValues = [];
 
+  @override
   void initState() {
     super.initState();
 
-    //Delay 30 seconds
+    Future.delayed(const Duration(seconds: 5), () {
+      _listColors = {1: 'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold', 5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
 
-    Future.delayed(const Duration(seconds: 10), () {
-      _listColors = {
-        1: 'Black',
-        2: 'Blue',
-        3: 'Brown',
-        4: 'Gold',
-        5: 'Green',
-        6: 'Grey',
-        7: 'Orange',
-        8: 'Pink',
-        9: 'Purple',
-        10: 'Red'
-      };
-
-      _listCategories = {
-        1: 'Boot',
-        2: 'Casual',
-        3: 'Flat',
-        4: 'Flip',
-        5: 'Lace up',
-        6: 'Loafer',
-        7: 'Slip-on',
-        8: 'Moccasins'
-      };
+      _listCategories = {1: 'Boot', 2: 'Casual', 3: 'Flat', 4: 'Flip', 5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
 
       //_selectedColorValues = [2, 4];
 
       // For Not Form like Center
-      setState(() {
-        _selectedColorValues = [2, 4];
-        _selectedCategoryValue = [3];
-      });
 
       // For Form
       // _categoryTextEditingController.text = _listCategories[3]!;
 
-      print('Finish loading categories');
+      Future.microtask(() {
+        setState(() {
+          // Update the state variables
 
+          // Update the state variables
+
+          _selectedColorValues = [2, 4];
+          // _selectedCategoryValue = [3];
+        });
+      });
+      print('Finish loading categories');
     });
   }
 
@@ -106,7 +93,8 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 
   /// This is Main Body widget.
   Widget _bodyApp() {
-    return Center(
+    return Form(
+        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -140,6 +128,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 
               // ####### Category Select List
               DropDownTextField(
+                key: _dropDownKey,
                 //style: const TextStyle(height: 0.85, fontSize: 14.0, color: Colors.deepOrangeAccent), //initial
                 textEditingController: _categoryTextEditingController,
                 title: 'Category',
@@ -157,7 +146,12 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                     _selectedCategoryValue = selectedIds!;
                   });
                    */
-
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please select category';
+                  }
+                  return null;
                 },
               ),
               const SizedBox(
@@ -179,37 +173,29 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
               const SizedBox(
                 height: 13.0,
               ),
-              _UpdateButton(),
+              ElevatedButton(
+                onPressed: () {
+                  // Check validator
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+
+                    print('Update button pressed');
+                  }
+                  else {
+                    // Programmatically tap the drop down field
+                    _dropDownKey.currentState?.onTextFieldTap();
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                child: const Text(
+                  'Update',
+                  style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
+                ),
+              ),
             ],
           ),
         ));
-  }
-}
-
-/// This is common class for 'Update' elevated button.
-class _UpdateButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: 60.0,
-      child: ElevatedButton(
-        onPressed: () {
-          // Check validator
-          if (Form.of(context).validate()) {
-            Form.of(context).save();
-            print('Update button pressed');
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-        child: const Text(
-          'Update',
-          style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal),
-        ),
-      ),
-    );
-
   }
 }

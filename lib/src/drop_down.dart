@@ -86,7 +86,7 @@ class DropDownState {
 class MainBody extends StatefulWidget {
   final DropDown dropDown;
 
-  const MainBody({required this.dropDown, Key? key}) : super(key: key);
+  const MainBody({required this.dropDown, super.key});
 
   @override
   State<MainBody> createState() => _MainBodyState();

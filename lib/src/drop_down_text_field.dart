@@ -23,6 +23,8 @@ class DropDownTextField extends StatefulWidget {
   final FormFieldValidator<String>? validator;
 
   //optional parameters
+  final String? submitTitle;
+  final FocusNode? focusNode;
   final InputDecoration? decoration;
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
@@ -42,6 +44,7 @@ class DropDownTextField extends StatefulWidget {
   final bool isSearchVisible;
 
   const DropDownTextField({
+    super.key,
     required this.textEditingController,
     this.title,
     required this.hint,
@@ -49,9 +52,10 @@ class DropDownTextField extends StatefulWidget {
     this.selectedOptions,
     this.onChanged,
     this.multiple = false,
-    Key? key,
 
     /// optional parameters
+    this.submitTitle,
+    this.focusNode,
     this.validator,
     this.decoration,
     this.textCapitalization,
@@ -67,13 +71,19 @@ class DropDownTextField extends StatefulWidget {
     this.backgroundColor,
     this.borderColor,
     this.primaryColor,
-  }) : super(key: key);
+  });
+
+  void openDropdown() {
+    final DropDownTextFieldState? state =
+        (key as GlobalKey?)?.currentState as DropDownTextFieldState?;
+    state?.onTextFieldTap();
+  }
 
   @override
-  State<DropDownTextField> createState() => _DropDownTextFieldState();
+  State<DropDownTextField> createState() => DropDownTextFieldState();
 }
 
-class _DropDownTextFieldState extends State<DropDownTextField> {
+class DropDownTextFieldState extends State<DropDownTextField> {
   // final TextEditingController _searchTextEditingController = TextEditingController();
 
   /// This is on text changed method which will display on city text field on changed.
@@ -88,9 +98,9 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
                 fontSize: 20.0,
               ),
         ),
-        submitButtonChild: const Text(
-          'Done',
-          style: TextStyle(
+        submitButtonChild: Text(
+          widget.submitTitle ?? 'Done',
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -114,6 +124,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
     super.initState();
   }
 
+  @override
   void didUpdateWidget(DropDownTextField oldWidget) {
     if (oldWidget.selectedOptions != widget.selectedOptions) {
       renewValue();
@@ -139,6 +150,7 @@ class _DropDownTextFieldState extends State<DropDownTextField> {
           keyboardType: TextInputType.none,
           showCursor: false,
           readOnly: true,
+          focusNode: widget.focusNode ?? FocusNode(),
           onTap: () {
             FocusScope.of(context).unfocus();
             onTextFieldTap();
