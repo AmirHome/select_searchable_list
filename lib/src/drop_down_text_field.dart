@@ -28,6 +28,7 @@ class DropDownTextField extends StatefulWidget {
   final InputDecoration? decoration;
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
+  final bool? enable;
   final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextDirection? textDirection;
@@ -60,6 +61,7 @@ class DropDownTextField extends StatefulWidget {
     this.decoration,
     this.textCapitalization,
     this.textInputAction,
+    this.enable,
     this.style,
     this.strutStyle,
     this.textDirection,
@@ -150,6 +152,7 @@ class DropDownTextFieldState extends State<DropDownTextField> {
           keyboardType: TextInputType.none,
           showCursor: false,
           readOnly: true,
+          enabled: widget.enable ?? true,
           focusNode: widget.focusNode ?? FocusNode(),
           onTap: () {
             FocusScope.of(context).unfocus();

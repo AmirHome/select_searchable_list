@@ -1,3 +1,6 @@
+## 0.2.1
+* Enable attribute
+
 ## 0.2.0
 * Add FocusNode
 * Programmatically tap the drop down ability
