@@ -29,6 +29,7 @@ class DropDownTextField extends StatefulWidget {
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
   final bool? enable;
+  final bool isRequired;
   final TextStyle? style;
   final StrutStyle? strutStyle;
   final TextDirection? textDirection;
@@ -62,6 +63,7 @@ class DropDownTextField extends StatefulWidget {
     this.textCapitalization,
     this.textInputAction,
     this.enable,
+    this.isRequired = false,
     this.style,
     this.strutStyle,
     this.textDirection,
@@ -176,7 +178,25 @@ class DropDownTextFieldState extends State<DropDownTextField> {
                           BorderSide(color: widget.primaryColor ?? Colors.black , width: 1.0, style: BorderStyle.solid)),
                       // labelStyle: const TextStyle(color: AmirHomePalette.errorColor), // Color when not focused
                       // floatingLabelStyle: TextStyle(color: AmirHomePalette.primaryColor), // Color when focused
-                      labelText: widget.title,
+                      // labelText: widget.title,
+                      label: RichText(
+                            text: TextSpan(
+                              text: widget.title,
+                              style: TextStyle(
+                                color: widget.primaryColor ?? Colors.black,
+                              ),
+                              children: [
+                                widget.isRequired
+                                    ? const TextSpan(
+                                        text: ' *',
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                      )
+                                    : const TextSpan(),
+                              ],
+                            ),
+                          ),
                       hintText: widget.hint,
                       suffixIcon: const Padding(
                         padding: EdgeInsets.only(top: 8), // add padding to adjust icon

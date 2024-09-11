@@ -147,6 +147,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                   });
                    */
                 },
+                // isRequired: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please select category';

@@ -1,3 +1,6 @@
+## 0.2.2
+* Is Required red asterisk label
+
 ## 0.2.1
 * Enable attribute
 
