@@ -1,3 +1,6 @@
+## 0.2.3
+* Remove Hardcoded text Search as searchHintText property
+
 ## 0.2.2
 * Is Required red asterisk label
 
