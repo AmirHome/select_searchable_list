@@ -44,6 +44,7 @@ class DropDownTextField extends StatefulWidget {
   /// [isSearchVisible] flag use to manage the search widget visibility
   /// by default it is [True] so widget will be visible.
   final bool isSearchVisible;
+  final String searchHintText;
 
   const DropDownTextField({
     super.key,
@@ -72,6 +73,7 @@ class DropDownTextField extends StatefulWidget {
     this.maxLines,
     this.minLines,
     this.isSearchVisible = true,
+    this.searchHintText = 'Search',
     this.backgroundColor,
     this.borderColor,
     this.primaryColor,
@@ -118,6 +120,7 @@ class DropDownTextFieldState extends State<DropDownTextField> {
         },
         enableMultipleSelection: widget.multiple,
         isSearchVisible: widget.isSearchVisible,
+        searchHintText: widget.searchHintText,
       ),
     ).showModal(context);
   }

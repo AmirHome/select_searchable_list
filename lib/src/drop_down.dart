@@ -39,6 +39,7 @@ class DropDown {
   /// [isSearchVisible] flag use to manage the search widget visibility
   /// by default it is [True] so widget will be visible.
   final bool isSearchVisible;
+  final String searchHintText;
 
   /// This will set the background color to the dropdown.
   final Color dropDownBackgroundColor;
@@ -54,6 +55,7 @@ class DropDown {
     this.submitButtonChild,
     this.searchWidget,
     this.isSearchVisible = true,
+    required this.searchHintText,
     this.dropDownBackgroundColor = Colors.transparent,
   });
 }
@@ -165,6 +167,7 @@ class _MainBodyState extends State<MainBody> {
                   AppTextField(
                     dropDown: widget.dropDown,
                     onTextChanged: _buildSearchList,
+                    searchHintText: widget.dropDown.searchHintText,
                   ),
             ),
 
