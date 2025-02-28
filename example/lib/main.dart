@@ -142,7 +142,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 
                 onChanged: (selectedIds) {
                   // setState(() => selectedIds);
-                  print(selectedIds);
+                  // print(selectedIds);
 
                   // For Form
                   /*
@@ -171,7 +171,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                 selectedOptions: _selectedColorValues,
                 onChanged: (selectedIds) {
                   // setState(() => selectedIds);
-                  print(selectedIds);
+                  // print(selectedIds);
                 },
                 multiple: true,
               ),
