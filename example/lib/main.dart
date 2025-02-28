@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:select_searchable_list/select_searchable_list.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       home: SelectSearchableListExample(),
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
     );
   }
 }
@@ -37,11 +39,11 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<DropDownTextFieldState> _dropDownKey = GlobalKey<DropDownTextFieldState>();
 
-  late Map<int, String> _listCategories = {};
-  late final List<int> _selectedCategoryValue = [];
+  late Map<dynamic, String> _listCategories = {};
+  late List<dynamic> _selectedCategoryValue = [];
 
-  late Map<int, String> _listColors = {};
-  late List<int> _selectedColorValues = [];
+  late Map<dynamic, String> _listColors = {};
+  late List<dynamic> _selectedColorValues = [];
 
   @override
   void initState() {
@@ -50,7 +52,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
     Future.delayed(const Duration(seconds: 5), () {
       _listColors = {1: 'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold', 5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
 
-      _listCategories = {1: 'Boot', 2: 'Casual', 3: 'Flat', 4: 'Flip', 5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
+      _listCategories = {1: 'Boot', '2': 'Casual', 3: 'Flat', 4: 'Flip', 5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
 
       //_selectedColorValues = [2, 4];
 
@@ -66,10 +68,12 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
           // Update the state variables
 
           _selectedColorValues = [2, 4];
-          // _selectedCategoryValue = [3];
+          _selectedCategoryValue = [2];
         });
       });
-      print('Finish loading categories');
+      if (kDebugMode) {
+        print('Finish loading categories');
+      }
     });
   }
 
@@ -138,7 +142,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 
                 onChanged: (selectedIds) {
                   // setState(() => selectedIds);
-                  //print(selectedIds);
+                  print(selectedIds);
 
                   // For Form
                   /*
@@ -167,7 +171,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                 selectedOptions: _selectedColorValues,
                 onChanged: (selectedIds) {
                   // setState(() => selectedIds);
-                  // print(selectedIds);
+                  print(selectedIds);
                 },
                 multiple: true,
               ),
@@ -180,7 +184,9 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
 
-                    print('Update button pressed');
+                    if (kDebugMode) {
+                      print('Update button pressed');
+                    }
                   }
                   else {
                     // Programmatically tap the drop down field

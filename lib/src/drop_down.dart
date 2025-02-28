@@ -12,16 +12,16 @@ The DropDownState class is responsible for showing the dropdown as a modal botto
 */
 class DropDown {
   /// This will give the list of data.
-  final Map<int, String> options;
+  final Map<dynamic, String> options;
 
   // This will give the the selected items from data.
-  final List<int>? selectedOptions;
+  final List<dynamic>? selectedOptions;
 
   /// This will give the call back to the selected items from list.
   final Function(List<dynamic>)? selectedItems;
 
   /// [listBuilder] will gives [index] as a function parameter and you can return your own widget based on [index].
-  final Widget Function(int index)? listBuilder;
+  final Widget Function(dynamic index)? listBuilder;
 
   /// This will give selection choice for single or multiple for list.
   final bool enableMultipleSelection;
@@ -96,8 +96,8 @@ class MainBody extends StatefulWidget {
 
 class _MainBodyState extends State<MainBody> {
   /// This list will set when the list of data is not available.
-  Map<int, String> mainList = {};
-  late List<int> selectedList;
+  Map<dynamic, String> mainList = {};
+  late List<dynamic> selectedList;
 
   @override
   void initState() {
@@ -235,7 +235,7 @@ class _MainBodyState extends State<MainBody> {
   /// This helps when search enabled & show the filtered data in list.
   _buildSearchList(String userSearchTerm) {
     // ####### Clone of options
-    final results = Map<int, String>.from(widget.dropDown.options);
+    final results = Map<dynamic, String>.from(widget.dropDown.options);
     results.removeWhere((id, value) =>
         !value.toLowerCase().contains(userSearchTerm.toLowerCase()));
 

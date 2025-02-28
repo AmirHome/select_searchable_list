@@ -15,9 +15,9 @@ class DropDownTextField extends StatefulWidget {
   final TextEditingController textEditingController;
   final String? title;
   final String hint;
-  final Map<int, String> options;
-  final List<int>? selectedOptions;
-  final Function(List<int>?)? onChanged;
+  final Map<dynamic, String> options;
+  final List<dynamic>? selectedOptions;
+  final Function(List<dynamic>?)? onChanged;
   final bool multiple;
   // FormFieldValidator<T>? validator
   final FormFieldValidator<String>? validator;
@@ -116,7 +116,7 @@ class DropDownTextFieldState extends State<DropDownTextField> {
         selectedItems: (List<dynamic> selectedList) {
           widget.textEditingController.text =
               tmpImplode(widget.options, selectedList);
-          widget.onChanged?.call(List<int>.from(selectedList));
+          widget.onChanged?.call(List<dynamic>.from(selectedList));
         },
         enableMultipleSelection: widget.multiple,
         isSearchVisible: widget.isSearchVisible,
@@ -222,8 +222,8 @@ class DropDownTextFieldState extends State<DropDownTextField> {
   }
 
   // Comma separated values of options
-  String tmpImplode(Map<int, String> options, List<dynamic> tmpSelectedList) {
-    Map<int, String> tmpOptions = Map<int, String>.from(options);
+  String tmpImplode(Map<dynamic, String> options, List<dynamic> tmpSelectedList) {
+    Map<dynamic, String> tmpOptions = Map<dynamic, String>.from(options);
 
     tmpOptions.removeWhere((id, value) => !tmpSelectedList.contains(id));
     return tmpOptions.values.join(',');

@@ -1,3 +1,8 @@
+## 0.2.6
+* Updated `DropDownTextField` class to ensure `options` and `selectedOptions` are properly typed for better type safety.
+* Refactored `DropDown` class to initialize `mainList` and `selectedList` with appropriate types, enhancing clarity and maintainability.
+* Improved overall code structure for better readability and adherence to Dart best practices.
+
 ## 0.2.3
 * Remove Hardcoded text Search as searchHintText property
 
