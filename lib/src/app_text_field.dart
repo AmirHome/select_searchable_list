@@ -13,8 +13,7 @@ class AppTextField extends StatefulWidget {
   final Function(String) onTextChanged;
   final String searchHintText;
 
-  const AppTextField(
-      {required this.dropDown, required this.onTextChanged, required this.searchHintText, super.key});
+  const AppTextField({required this.dropDown, required this.onTextChanged, required this.searchHintText, super.key});
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -22,6 +21,12 @@ class AppTextField extends StatefulWidget {
 
 class _AppTextFieldState extends State<AppTextField> {
   final TextEditingController _editingController = TextEditingController();
+
+  @override
+  void dispose() {
+    _editingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +41,7 @@ class _AppTextFieldState extends State<AppTextField> {
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.black12,
-          contentPadding:
-              const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
+          contentPadding: const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
           hintText: widget.searchHintText,
           border: const OutlineInputBorder(
             borderSide: BorderSide(
