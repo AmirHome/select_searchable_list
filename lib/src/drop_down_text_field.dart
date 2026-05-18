@@ -80,8 +80,7 @@ class DropDownTextField extends StatefulWidget {
   });
 
   void openDropdown() {
-    final DropDownTextFieldState? state =
-        (key as GlobalKey?)?.currentState as DropDownTextFieldState?;
+    final DropDownTextFieldState? state = (key as GlobalKey?)?.currentState as DropDownTextFieldState?;
     state?.onTextFieldTap();
   }
 
@@ -96,26 +95,12 @@ class DropDownTextFieldState extends State<DropDownTextField> {
   void onTextFieldTap() {
     DropDownState(
       DropDown(
-        bottomSheetTitle: Text(
-          widget.title ?? '',
-          style: widget.style ??
-              const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
-              ),
-        ),
-        submitButtonChild: Text(
-          widget.submitTitle ?? 'Done',
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        bottomSheetTitle: Text(widget.title ?? '', style: widget.style ?? const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+        submitButtonChild: Text(widget.submitTitle ?? 'Done', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         options: widget.options,
         selectedOptions: widget.selectedOptions,
         selectedItems: (List<dynamic> selectedList) {
-          widget.textEditingController.text =
-              tmpImplode(widget.options, selectedList);
+          widget.textEditingController.text = tmpImplode(widget.options, selectedList);
           widget.onChanged?.call(List<dynamic>.from(selectedList));
         },
         enableMultipleSelection: widget.multiple,
@@ -141,8 +126,7 @@ class DropDownTextFieldState extends State<DropDownTextField> {
 
   void renewValue() {
     if (!['', null, false, 0].contains(widget.selectedOptions)) {
-      widget.textEditingController.text =
-          tmpImplode(widget.options, widget.selectedOptions!);
+      widget.textEditingController.text = tmpImplode(widget.options, widget.selectedOptions!);
     }
   }
 
@@ -165,49 +149,45 @@ class DropDownTextFieldState extends State<DropDownTextField> {
           },
           // Optional
           validator: widget.validator,
-          decoration: widget.decoration ??
+          decoration:
+              widget.decoration ??
               InputDecoration(
-                      filled: true,
-                      fillColor: widget.backgroundColor ?? Colors.white,
-                      hintStyle: TextStyle(color: widget.borderColor ?? Colors.grey.shade300),
+                filled: true,
+                fillColor: widget.backgroundColor ?? Colors.white,
+                hintStyle: TextStyle(color: widget.borderColor ?? Colors.grey.shade300),
 
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide: BorderSide(color: widget.borderColor ?? Colors.grey.shade300, width: 1.0, style: BorderStyle.solid),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                          borderSide:
-                          BorderSide(color: widget.primaryColor ?? Colors.black , width: 1.0, style: BorderStyle.solid)),
-                      // labelStyle: const TextStyle(color: AmirHomePalette.errorColor), // Color when not focused
-                      // floatingLabelStyle: TextStyle(color: AmirHomePalette.primaryColor), // Color when focused
-                      // labelText: widget.title,
-                      label: RichText(
-                            text: TextSpan(
-                              text: widget.title,
-                              style: TextStyle(
-                                color: widget.primaryColor ?? Colors.black,
-                              ),
-                              children: [
-                                widget.isRequired
-                                    ? const TextSpan(
-                                        text: ' *',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                        ),
-                                      )
-                                    : const TextSpan(),
-                              ],
-                            ),
-                          ),
-                      hintText: widget.hint,
-                      suffixIcon: const Padding(
-                        padding: EdgeInsets.only(top: 8), // add padding to adjust icon
-                        child: Icon(Icons.keyboard_arrow_down),
-                      ),
-                    ),
-          textCapitalization:
-              widget.textCapitalization ?? TextCapitalization.none,
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                  borderSide: BorderSide(color: widget.borderColor ?? Colors.grey.shade300, width: 1.0, style: BorderStyle.solid),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                  borderSide: BorderSide(color: widget.primaryColor ?? Colors.black, width: 1.0, style: BorderStyle.solid),
+                ),
+                // labelStyle: const TextStyle(color: AmirHomePalette.errorColor), // Color when not focused
+                // floatingLabelStyle: TextStyle(color: AmirHomePalette.primaryColor), // Color when focused
+                // labelText: widget.title,
+                label: RichText(
+                  text: TextSpan(
+                    text: widget.title,
+                    style: TextStyle(color: widget.primaryColor ?? Colors.black),
+                    children: [
+                      widget.isRequired
+                          ? const TextSpan(
+                              text: ' *',
+                              style: TextStyle(color: Colors.red),
+                            )
+                          : const TextSpan(),
+                    ],
+                  ),
+                ),
+                hintText: widget.hint,
+                suffixIcon: const Padding(
+                  padding: EdgeInsets.only(top: 8), // add padding to adjust icon
+                  child: Icon(Icons.keyboard_arrow_down),
+                ),
+              ),
+          textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
           textInputAction: widget.textInputAction,
           style: widget.style ?? const TextStyle(height: 0.85, fontSize: 14.0), //initial
           strutStyle: widget.strutStyle,
@@ -223,9 +203,11 @@ class DropDownTextFieldState extends State<DropDownTextField> {
 
   // Comma separated values of options
   String tmpImplode(Map<dynamic, String> options, List<dynamic> tmpSelectedList) {
-    Map<dynamic, String> tmpOptions = Map<dynamic, String>.from(options);
+    if (tmpSelectedList.isEmpty) {
+      return '';
+    }
 
-    tmpOptions.removeWhere((id, value) => !tmpSelectedList.contains(id));
-    return tmpOptions.values.join(',');
+    final selectedSet = tmpSelectedList.toSet();
+    return options.entries.where((entry) => selectedSet.contains(entry.key)).map((entry) => entry.value).join(',');
   }
 }
