@@ -1,3 +1,10 @@
+## 0.2.9
+* Optimized dropdown list rendering by moving `keys.toList()` and `values.toList()` out of `itemBuilder`.
+* Optimized `tmpImplode` to avoid cloning and mutating temporary maps.
+* Optimized search filtering logic to reduce unnecessary allocations and repeated lowercase conversions.
+* Fixed state management issue by cloning `selectedOptions` to prevent unintended external list mutation.
+* Removed unnecessary `StatefulBuilder` wrapper around `MainBody` in modal builder.
+
 ## 0.2.6
 * Updated `DropDownTextField` class to ensure `options` and `selectedOptions` are properly typed for better type safety.
 * Refactored `DropDown` class to initialize `mainList` and `selectedList` with appropriate types, enhancing clarity and maintainability.

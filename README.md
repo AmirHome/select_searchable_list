@@ -85,6 +85,15 @@ This property takes bool value as a parameter. [isSearchVisible] is use to manag
 
 Dropdown Searchable list is [MIT-licensed](https://github.com/AmirHome/select_searchable_list/LICENSE "MIT-licensed").
 
+## Additional information
+```
+    init_number=0; build_number=$(($(git rev-list HEAD --count) + init_number)); major=$((build_number / 2000)); minor=$(( (build_number / 20) % 10 )); patch=$((build_number % 20)); patch=$(printf "%02d" $patch); version="$major.$minor.$patch"; echo "version: $version+$build_number"
+
+    dart fix --apply && flutter analyze
+
+    flutter pub publish --dry-run
+```
+
 # Let us know!
 
 I would be happy if you send us feedback on your projects where you use our component. Just email amir.email@gmail.com  and let me know if you have any questions or suggestions about my work.
