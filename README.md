@@ -92,6 +92,8 @@ Dropdown Searchable list is [MIT-licensed](https://github.com/AmirHome/select_se
     dart fix --apply && flutter analyze
 
     flutter pub publish --dry-run
+
+    flutter pub publish --force
 ```
 
 # Let us know!
