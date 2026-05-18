@@ -69,9 +69,7 @@ class DropDownState {
   void showModal(context) {
     showModalBottomSheet(
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15.0))),
       context: context,
       builder: (context) {
         return StatefulBuilder(
@@ -119,25 +117,18 @@ class _MainBodyState extends State<MainBody> {
           children: <Widget>[
             const SizedBox(height: 8),
             Container(
-              width: MediaQuery.of(context).size.width /
-                  5, // sets the width of the container to 200 pixels
+              width: MediaQuery.of(context).size.width / 5, // sets the width of the container to 200 pixels
               height: 3,
               color: Colors.grey,
             ),
             //SizedBox(height: 13),
             Padding(
-              padding: EdgeInsets.only(
-                  left: 13.0,
-                  right: 13.0,
-                  top: 21.0,
-                  bottom:
-                      (widget.dropDown.enableMultipleSelection) ? 0.0 : 13.0),
+              padding: EdgeInsets.only(left: 13.0, right: 13.0, top: 21.0, bottom: (widget.dropDown.enableMultipleSelection) ? 0.0 : 13.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   /// Bottom sheet title text
-                  Expanded(
-                      child: widget.dropDown.bottomSheetTitle ?? Container()),
+                  Expanded(child: widget.dropDown.bottomSheetTitle ?? Container()),
 
                   /// Done button
                   Visibility(
@@ -150,8 +141,7 @@ class _MainBodyState extends State<MainBody> {
                             widget.dropDown.selectedItems?.call(selectedList);
                             _onUnFocusKeyboardAndPop();
                           },
-                          child: widget.dropDown.submitButtonChild ??
-                              const Text('Done'),
+                          child: widget.dropDown.submitButtonChild ?? const Text('Done'),
                         ),
                       ),
                     ),
@@ -163,65 +153,53 @@ class _MainBodyState extends State<MainBody> {
             /// A [TextField] that displays a list of suggestions as the user types with clear button.
             Visibility(
               visible: widget.dropDown.isSearchVisible,
-              child: widget.dropDown.searchWidget ??
-                  AppTextField(
-                    dropDown: widget.dropDown,
-                    onTextChanged: _buildSearchList,
-                    searchHintText: widget.dropDown.searchHintText,
-                  ),
+              child:
+                  widget.dropDown.searchWidget ??
+                  AppTextField(dropDown: widget.dropDown, onTextChanged: _buildSearchList, searchHintText: widget.dropDown.searchHintText),
             ),
 
             /// Listview (list of data with check box for multiple selection & on tile tap single selection)
             Expanded(
-              child: ListView.builder(
-                controller: scrollController,
-                itemCount: mainList.length,
-                itemBuilder: (context, index) {
+              child: Builder(
+                builder: (context) {
                   final mainListKeys = mainList.keys.toList();
                   final mainListValues = mainList.values.toList();
 
-                  bool isSelected = selectedList.contains(mainListKeys[index]);
+                  return ListView.builder(
+                    controller: scrollController,
+                    itemCount: mainListKeys.length,
+                    itemBuilder: (context, index) {
+                      bool isSelected = selectedList.contains(mainListKeys[index]);
 
-                  return InkWell(
-                    onTap: widget.dropDown.enableMultipleSelection
-                        ? null
-                        : () {
-                            widget.dropDown.selectedItems
-                                ?.call([mainListKeys[index]]);
-                            _onUnFocusKeyboardAndPop();
-                          },
-                    child: Container(
-                      color: widget.dropDown.dropDownBackgroundColor,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                        child: ListTile(
-                          title: widget.dropDown.listBuilder?.call(index) ??
-                              Text(
-                                mainListValues[index],
-                              ),
-                          trailing: widget.dropDown.enableMultipleSelection
-                              ? GestureDetector(
-                                  onTap: () {
-                                    !isSelected
-                                        ? selectedList.add(mainListKeys[index])
-                                        : selectedList
-                                            .remove(mainListKeys[index]);
-                                    setState(() {
-                                      //selectedList;
-                                    });
-                                  },
-                                  child: isSelected
-                                      ? const Icon(Icons.check_box)
-                                      : const Icon(
-                                          Icons.check_box_outline_blank),
-                                )
-                              : const SizedBox(
-                                  height: 0.0,
-                                  width: 0.0,
-                                ),
+                      return InkWell(
+                        onTap: widget.dropDown.enableMultipleSelection
+                            ? null
+                            : () {
+                                widget.dropDown.selectedItems?.call([mainListKeys[index]]);
+                                _onUnFocusKeyboardAndPop();
+                              },
+                        child: Container(
+                          color: widget.dropDown.dropDownBackgroundColor,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
+                            child: ListTile(
+                              title: widget.dropDown.listBuilder?.call(index) ?? Text(mainListValues[index]),
+                              trailing: widget.dropDown.enableMultipleSelection
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        !isSelected ? selectedList.add(mainListKeys[index]) : selectedList.remove(mainListKeys[index]);
+                                        setState(() {
+                                          //selectedList;
+                                        });
+                                      },
+                                      child: isSelected ? const Icon(Icons.check_box) : const Icon(Icons.check_box_outline_blank),
+                                    )
+                                  : const SizedBox(height: 0.0, width: 0.0),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
                 },
               ),
@@ -236,8 +214,7 @@ class _MainBodyState extends State<MainBody> {
   _buildSearchList(String userSearchTerm) {
     // ####### Clone of options
     final results = Map<dynamic, String>.from(widget.dropDown.options);
-    results.removeWhere((id, value) =>
-        !value.toLowerCase().contains(userSearchTerm.toLowerCase()));
+    results.removeWhere((id, value) => !value.toLowerCase().contains(userSearchTerm.toLowerCase()));
 
     if (userSearchTerm.isEmpty) {
       mainList = widget.dropDown.options;
