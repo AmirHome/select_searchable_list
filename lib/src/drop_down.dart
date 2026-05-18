@@ -72,11 +72,7 @@ class DropDownState {
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15.0))),
       context: context,
       builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return MainBody(dropDown: dropDown);
-          },
-        );
+        return MainBody(dropDown: dropDown);
       },
     );
   }
@@ -101,7 +97,7 @@ class _MainBodyState extends State<MainBody> {
   void initState() {
     super.initState();
     mainList = widget.dropDown.options;
-    selectedList = widget.dropDown.selectedOptions ?? [];
+    selectedList = List<dynamic>.from(widget.dropDown.selectedOptions ?? const <dynamic>[]);
     _setSearchWidgetListener();
   }
 
@@ -153,8 +149,7 @@ class _MainBodyState extends State<MainBody> {
             /// A [TextField] that displays a list of suggestions as the user types with clear button.
             Visibility(
               visible: widget.dropDown.isSearchVisible,
-              child:
-                  widget.dropDown.searchWidget ??
+              child: widget.dropDown.searchWidget ??
                   AppTextField(dropDown: widget.dropDown, onTextChanged: _buildSearchList, searchHintText: widget.dropDown.searchHintText),
             ),
 
