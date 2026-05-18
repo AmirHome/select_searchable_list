@@ -206,17 +206,24 @@ class _MainBodyState extends State<MainBody> {
   }
 
   /// This helps when search enabled & show the filtered data in list.
-  _buildSearchList(String userSearchTerm) {
-    // ####### Clone of options
-    final results = Map<dynamic, String>.from(widget.dropDown.options);
-    results.removeWhere((id, value) => !value.toLowerCase().contains(userSearchTerm.toLowerCase()));
-
+  void _buildSearchList(String userSearchTerm) {
     if (userSearchTerm.isEmpty) {
-      mainList = widget.dropDown.options;
-    } else {
-      mainList = results;
+      setState(() {
+        mainList = widget.dropDown.options;
+      });
+      return;
     }
-    setState(() {});
+
+    final lowerTerm = userSearchTerm.toLowerCase();
+    final filteredResults = Map<dynamic, String>.fromEntries(
+      widget.dropDown.options.entries.where(
+        (entry) => entry.value.toLowerCase().contains(lowerTerm),
+      ),
+    );
+
+    setState(() {
+      mainList = filteredResults;
+    });
   }
 
   /// This helps to UnFocus the keyboard & pop from the bottom sheet.
