@@ -66,7 +66,7 @@ class DropDownState {
   DropDownState(this.dropDown);
 
   /// This gives the bottom sheet widget.
-  void showModal(context) {
+  void showModal(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15.0))),
@@ -149,7 +149,8 @@ class _MainBodyState extends State<MainBody> {
             /// A [TextField] that displays a list of suggestions as the user types with clear button.
             Visibility(
               visible: widget.dropDown.isSearchVisible,
-              child: widget.dropDown.searchWidget ??
+              child:
+                  widget.dropDown.searchWidget ??
                   AppTextField(dropDown: widget.dropDown, onTextChanged: _buildSearchList, searchHintText: widget.dropDown.searchHintText),
             ),
 
@@ -216,9 +217,7 @@ class _MainBodyState extends State<MainBody> {
 
     final lowerTerm = userSearchTerm.toLowerCase();
     final filteredResults = Map<dynamic, String>.fromEntries(
-      widget.dropDown.options.entries.where(
-        (entry) => entry.value.toLowerCase().contains(lowerTerm),
-      ),
+      widget.dropDown.options.entries.where((entry) => entry.value.toLowerCase().contains(lowerTerm)),
     );
 
     setState(() {
@@ -227,7 +226,7 @@ class _MainBodyState extends State<MainBody> {
   }
 
   /// This helps to UnFocus the keyboard & pop from the bottom sheet.
-  _onUnFocusKeyboardAndPop() {
+  void _onUnFocusKeyboardAndPop() {
     FocusScope.of(context).unfocus();
     Navigator.of(context).pop();
   }

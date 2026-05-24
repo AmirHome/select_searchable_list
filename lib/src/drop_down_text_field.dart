@@ -112,22 +112,29 @@ class DropDownTextFieldState extends State<DropDownTextField> {
 
   @override
   void initState() {
-    renewValue();
     super.initState();
+    _scheduleRenewValue();
   }
 
   @override
   void didUpdateWidget(DropDownTextField oldWidget) {
     if (oldWidget.selectedOptions != widget.selectedOptions) {
-      renewValue();
+      _scheduleRenewValue();
     }
     super.didUpdateWidget(oldWidget);
   }
 
-  void renewValue() {
-    if (!['', null, false, 0].contains(widget.selectedOptions)) {
-      widget.textEditingController.text = tmpImplode(widget.options, widget.selectedOptions!);
-    }
+  void _scheduleRenewValue() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
+      final value = !['', null, false, 0].contains(widget.selectedOptions) ? tmpImplode(widget.options, widget.selectedOptions!) : '';
+      if (widget.textEditingController.text != value) {
+        widget.textEditingController.text = value;
+      }
+    });
   }
 
   @override
