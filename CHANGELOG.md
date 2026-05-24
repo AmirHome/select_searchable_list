@@ -1,3 +1,7 @@
+## 0.2.12
+* Compatible with Flutter 3.44.0
+* Added Windows runner support with console output and DPI awareness
+
 ## 0.2.9
 * Optimized dropdown list rendering by moving `keys.toList()` and `values.toList()` out of `itemBuilder`.
 * Optimized `tmpImplode` to avoid cloning and mutating temporary maps.
