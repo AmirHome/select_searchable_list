@@ -11,7 +11,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: SelectSearchableListExample(), debugShowCheckedModeBanner: true);
+    final colorScheme = ColorScheme.fromSeed(seedColor: const Color(0xFF006874));
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: colorScheme,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: BorderSide(color: colorScheme.outline),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: BorderSide(color: colorScheme.primary, width: 1.5),
+          ),
+          filled: true,
+          fillColor: colorScheme.surface,
+        ),
+        bottomSheetTheme: const BottomSheetThemeData(showDragHandle: true),
+      ),
+      home: const SelectSearchableListExample(),
+    );
   }
 }
 
@@ -43,32 +66,16 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 5), () {
-      _listColors = {1: 'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold', 5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
+    _listColors = {1: 'Black', 2: 'Blue', 3: 'Brown', 4: 'Gold', 5: 'Green', 6: 'Grey', 7: 'Orange', 8: 'Pink', 9: 'Purple', 10: 'Red'};
 
-      _listCategories = {1: 'Boot', '2': 'Casual', 3: 'Flat', 4: 'Flip', 5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
+    _listCategories = {1: 'Boot', '2': 'Casual', 3: 'Flat', 4: 'Flip', 5: 'Lace up', 6: 'Loafer', 7: 'Slip-on', 8: 'Moccasins'};
 
-      //_selectedColorValues = [2, 4];
+    _selectedColorValues = [2, 4];
+    _selectedCategoryValue = [2];
 
-      // For Not Form like Center
-
-      // For Form
-      // _categoryTextEditingController.text = _listCategories[3]!;
-
-      Future.microtask(() {
-        setState(() {
-          // Update the state variables
-
-          // Update the state variables
-
-          _selectedColorValues = [2, 4];
-          _selectedCategoryValue = [2];
-        });
-      });
-      if (kDebugMode) {
-        print('Finish loading categories');
-      }
-    });
+    if (kDebugMode) {
+      print('Categories loaded');
+    }
   }
 
   @override
@@ -81,7 +88,11 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(resizeToAvoidBottomInset: false, body: SafeArea(child: _bodyApp()));
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(title: const Text('Select Searchable List')),
+      body: SafeArea(child: _bodyApp()),
+    );
   }
 
   /// This is Main Body widget.
@@ -89,20 +100,19 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 34.0),
-            const Text('Product Details', style: TextStyle(fontSize: 34.0, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 13.0),
+            Text('Product Details', style: Theme.of(context).textTheme.headlineMedium),
+            const SizedBox(height: 16.0),
 
             /// Product name field
             TextFormField(
               controller: _productNameTextEditingController,
-              decoration: const InputDecoration(border: OutlineInputBorder(), labelText: 'Product Name'),
+              decoration: const InputDecoration(labelText: 'Product Name', hintText: 'Type a product name'),
             ),
-            const SizedBox(height: 13.0),
+            const SizedBox(height: 16.0),
 
             // ####### Category Select List
             DropDownTextField(
@@ -127,7 +137,7 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                 return null;
               },
             ),
-            const SizedBox(height: 13.0),
+            const SizedBox(height: 16.0),
             // ####### Colors Select List
             DropDownTextField(
               textEditingController: _colorsTextEditingController,
@@ -151,8 +161,8 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
               },
               multiple: true,
             ),
-            const SizedBox(height: 13.0),
-            ElevatedButton(
+            const SizedBox(height: 20.0),
+            FilledButton.icon(
               onPressed: () {
                 // Check validator
                 if (_formKey.currentState!.validate()) {
@@ -166,8 +176,8 @@ class _SelectSearchableListExampleState extends State<SelectSearchableListExampl
                   _dropDownKey.currentState?.onTextFieldTap();
                 }
               },
-              style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              child: const Text('Update', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.normal)),
+              icon: const Icon(Icons.save_outlined),
+              label: const Text('Update'),
             ),
           ],
         ),

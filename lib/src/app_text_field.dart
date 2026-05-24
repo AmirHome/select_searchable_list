@@ -30,38 +30,32 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: TextFormField(
         controller: _editingController,
-        cursorColor: Colors.black,
+        cursorColor: colorScheme.primary,
         onChanged: (value) {
           widget.onTextChanged(value);
         },
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.black12,
-          contentPadding: const EdgeInsets.only(left: 0, bottom: 0, top: 0, right: 15),
+          fillColor: colorScheme.surfaceContainerHighest,
+          contentPadding: const EdgeInsetsDirectional.only(start: 8, end: 12),
           hintText: widget.searchHintText,
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8.0),
-            ),
+          border: OutlineInputBorder(borderRadius: const BorderRadius.all(Radius.circular(16.0)), borderSide: BorderSide.none),
+          enabledBorder: OutlineInputBorder(borderRadius: const BorderRadius.all(Radius.circular(16.0)), borderSide: BorderSide.none),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+            borderSide: BorderSide(color: colorScheme.primary, width: 1.2),
           ),
-          prefixIcon: const IconButton(
-            icon: Icon(Icons.search),
-            onPressed: null,
-          ),
+          prefixIcon: Icon(Icons.search, color: colorScheme.onSurfaceVariant),
           suffixIcon: GestureDetector(
             onTap: onClearTap,
-            child: const Icon(
-              Icons.cancel,
-              color: Colors.grey,
-            ),
+            child: Icon(Icons.cancel, color: colorScheme.onSurfaceVariant),
           ),
         ),
       ),

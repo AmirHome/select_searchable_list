@@ -1,6 +1,7 @@
-## 0.2.12
+## 0.2.13
 * Compatible with Flutter 3.44.0
 * Added Windows runner support with console output and DPI awareness
+* Matrial design improvements for better user experience
 
 ## 0.2.9
 * Optimized dropdown list rendering by moving `keys.toList()` and `values.toList()` out of `itemBuilder`.

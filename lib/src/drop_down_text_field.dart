@@ -139,17 +139,20 @@ class DropDownTextFieldState extends State<DropDownTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
           controller: widget.textEditingController,
-          cursorColor: Colors.black,
+          cursorColor: widget.primaryColor ?? colorScheme.primary,
           keyboardType: TextInputType.none,
           showCursor: false,
           readOnly: true,
           enabled: widget.enable ?? true,
-          focusNode: widget.focusNode ?? FocusNode(),
+          focusNode: widget.focusNode,
           onTap: () {
             FocusScope.of(context).unfocus();
             onTextFieldTap();
@@ -160,43 +163,48 @@ class DropDownTextFieldState extends State<DropDownTextField> {
               widget.decoration ??
               InputDecoration(
                 filled: true,
-                fillColor: widget.backgroundColor ?? Colors.white,
-                hintStyle: TextStyle(color: widget.borderColor ?? Colors.grey.shade300),
+                fillColor: widget.backgroundColor,
+                hintStyle: TextStyle(color: colorScheme.onSurfaceVariant),
 
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  borderSide: BorderSide(color: widget.borderColor ?? Colors.grey.shade300, width: 1.0, style: BorderStyle.solid),
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: widget.borderColor ?? colorScheme.outline),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  borderSide: BorderSide(color: widget.primaryColor ?? Colors.black, width: 1.0, style: BorderStyle.solid),
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: widget.primaryColor ?? colorScheme.primary, width: 1.5),
                 ),
-                // labelStyle: const TextStyle(color: AmirHomePalette.errorColor), // Color when not focused
-                // floatingLabelStyle: TextStyle(color: AmirHomePalette.primaryColor), // Color when focused
-                // labelText: widget.title,
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: colorScheme.error),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide(color: colorScheme.error, width: 1.5),
+                ),
                 label: RichText(
                   text: TextSpan(
                     text: widget.title,
-                    style: TextStyle(color: widget.primaryColor ?? Colors.black),
+                    style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onSurface),
                     children: [
                       widget.isRequired
-                          ? const TextSpan(
+                          ? TextSpan(
                               text: ' *',
-                              style: TextStyle(color: Colors.red),
+                              style: TextStyle(color: colorScheme.error),
                             )
                           : const TextSpan(),
                     ],
                   ),
                 ),
                 hintText: widget.hint,
-                suffixIcon: const Padding(
-                  padding: EdgeInsets.only(top: 8), // add padding to adjust icon
-                  child: Icon(Icons.keyboard_arrow_down),
+                suffixIcon: Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 8),
+                  child: Icon(Icons.keyboard_arrow_down, color: colorScheme.onSurfaceVariant),
                 ),
               ),
           textCapitalization: widget.textCapitalization ?? TextCapitalization.none,
           textInputAction: widget.textInputAction,
-          style: widget.style ?? const TextStyle(height: 0.85, fontSize: 14.0), //initial
+          style: widget.style ?? theme.textTheme.bodyLarge,
           strutStyle: widget.strutStyle,
           textDirection: widget.textDirection,
           textAlign: widget.textAlign ?? TextAlign.start,

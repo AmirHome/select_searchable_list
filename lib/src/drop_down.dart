@@ -69,7 +69,8 @@ class DropDownState {
   void showModal(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(15.0))),
+      showDragHandle: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(28.0))),
       context: context,
       builder: (context) {
         return MainBody(dropDown: dropDown);
@@ -103,36 +104,30 @@ class _MainBodyState extends State<MainBody> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
       minChildSize: 0.13,
       maxChildSize: 0.9,
       expand: false,
       builder: (BuildContext context, ScrollController scrollController) {
-        return Column(
-          children: <Widget>[
-            const SizedBox(height: 8),
-            Container(
-              width: MediaQuery.of(context).size.width / 5, // sets the width of the container to 200 pixels
-              height: 3,
-              color: Colors.grey,
-            ),
-            //SizedBox(height: 13),
-            Padding(
-              padding: EdgeInsets.only(left: 13.0, right: 13.0, top: 21.0, bottom: (widget.dropDown.enableMultipleSelection) ? 0.0 : 13.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  /// Bottom sheet title text
-                  Expanded(child: widget.dropDown.bottomSheetTitle ?? Container()),
-
-                  /// Done button
-                  Visibility(
-                    visible: widget.dropDown.enableMultipleSelection,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Material(
-                        child: ElevatedButton(
+        return SafeArea(
+          top: false,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0, bottom: widget.dropDown.enableMultipleSelection ? 0.0 : 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(child: widget.dropDown.bottomSheetTitle ?? const SizedBox.shrink()),
+                    Visibility(
+                      visible: widget.dropDown.enableMultipleSelection,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: FilledButton(
                           onPressed: () {
                             widget.dropDown.selectedItems?.call(selectedList);
                             _onUnFocusKeyboardAndPop();
@@ -141,66 +136,80 @@ class _MainBodyState extends State<MainBody> {
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            /// A [TextField] that displays a list of suggestions as the user types with clear button.
-            Visibility(
-              visible: widget.dropDown.isSearchVisible,
-              child:
-                  widget.dropDown.searchWidget ??
-                  AppTextField(dropDown: widget.dropDown, onTextChanged: _buildSearchList, searchHintText: widget.dropDown.searchHintText),
-            ),
+              /// A [TextField] that displays a list of suggestions as the user types with clear button.
+              Visibility(
+                visible: widget.dropDown.isSearchVisible,
+                child:
+                    widget.dropDown.searchWidget ??
+                    AppTextField(
+                      dropDown: widget.dropDown,
+                      onTextChanged: _buildSearchList,
+                      searchHintText: widget.dropDown.searchHintText,
+                    ),
+              ),
 
-            /// Listview (list of data with check box for multiple selection & on tile tap single selection)
-            Expanded(
-              child: Builder(
-                builder: (context) {
-                  final mainListKeys = mainList.keys.toList();
-                  final mainListValues = mainList.values.toList();
+              /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+              Expanded(
+                child: Builder(
+                  builder: (context) {
+                    final mainListKeys = mainList.keys.toList();
+                    final mainListValues = mainList.values.toList();
 
-                  return ListView.builder(
-                    controller: scrollController,
-                    itemCount: mainListKeys.length,
-                    itemBuilder: (context, index) {
-                      bool isSelected = selectedList.contains(mainListKeys[index]);
+                    return ListView.builder(
+                      controller: scrollController,
+                      itemCount: mainListKeys.length,
+                      itemBuilder: (context, index) {
+                        final itemKey = mainListKeys[index];
+                        final isSelected = selectedList.contains(itemKey);
 
-                      return InkWell(
-                        onTap: widget.dropDown.enableMultipleSelection
-                            ? null
-                            : () {
-                                widget.dropDown.selectedItems?.call([mainListKeys[index]]);
-                                _onUnFocusKeyboardAndPop();
-                              },
-                        child: Container(
-                          color: widget.dropDown.dropDownBackgroundColor,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(13, 0, 13, 0),
-                            child: ListTile(
-                              title: widget.dropDown.listBuilder?.call(index) ?? Text(mainListValues[index]),
-                              trailing: widget.dropDown.enableMultipleSelection
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        !isSelected ? selectedList.add(mainListKeys[index]) : selectedList.remove(mainListKeys[index]);
-                                        setState(() {
-                                          //selectedList;
-                                        });
-                                      },
-                                      child: isSelected ? const Icon(Icons.check_box) : const Icon(Icons.check_box_outline_blank),
-                                    )
-                                  : const SizedBox(height: 0.0, width: 0.0),
-                            ),
+                        return Material(
+                          color: widget.dropDown.dropDownBackgroundColor == Colors.transparent
+                              ? Colors.transparent
+                              : widget.dropDown.dropDownBackgroundColor,
+                          child: ListTile(
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
+                            selected: isSelected,
+                            selectedTileColor: colorScheme.secondaryContainer,
+                            title: widget.dropDown.listBuilder?.call(index) ?? Text(mainListValues[index]),
+                            trailing: widget.dropDown.enableMultipleSelection
+                                ? Icon(
+                                    isSelected ? Icons.check_box : Icons.check_box_outline_blank,
+                                    color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                                  )
+                                : (isSelected ? Icon(Icons.check, color: colorScheme.primary) : const SizedBox.shrink()),
+                            onTap: () {
+                              if (widget.dropDown.enableMultipleSelection) {
+                                setState(() {
+                                  if (isSelected) {
+                                    selectedList.remove(itemKey);
+                                  } else {
+                                    selectedList.add(itemKey);
+                                  }
+                                });
+                                return;
+                              }
+
+                              widget.dropDown.selectedItems?.call([itemKey]);
+                              _onUnFocusKeyboardAndPop();
+                            },
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+              if (mainList.isEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text('No results found', style: theme.textTheme.bodyMedium?.copyWith(color: colorScheme.onSurfaceVariant)),
+                ),
+            ],
+          ),
         );
       },
     );
